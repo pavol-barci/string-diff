@@ -1,0 +1,6 @@
+﻿services:
+  stringdiff:
+    image: stringdiff
+    build:
+      context: .
+      dockerfile: Dockerfile

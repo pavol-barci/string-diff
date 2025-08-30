@@ -1,0 +1,6 @@
+@StringDiff_HostAddress = http://localhost:5105
+
+GET {{StringDiff_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
