@@ -9,8 +9,16 @@ using StringDiff.Models;
 
 namespace StringDiff.Extensions;
 
+/// <summary>
+/// Collection of extension methods which register specific parts of the application services
+/// </summary>
 public static class ServiceCollectionExtensions
 {
+    /// <summary>
+    /// Register application (domain) services
+    /// </summary>
+    /// <param name="services">Collection of services</param>
+    /// <returns>Collection of services</returns>
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped<IDiffService, DiffService>();
@@ -19,6 +27,12 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
+    /// <summary>
+    /// Register infrastructure services
+    /// </summary>
+    /// <param name="services">Collection of services</param>
+    /// <param name="environment">Info about current environment</param>
+    /// <returns>Collection of services</returns>
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services,
         IWebHostEnvironment environment)
     {
@@ -34,6 +48,11 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
+    /// <summary>
+    /// Register core (asp.net, swagger, etc) services 
+    /// </summary>
+    /// <param name="services">Collection of services</param>
+    /// <returns>Collection of services</returns>
     public static IServiceCollection AddCoreServices(this IServiceCollection services)
     {
         services.AddControllers()
@@ -47,6 +66,10 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
+    /// <summary>
+    /// Configure custom validation handling in order to return custom error object when validation requests
+    /// </summary>
+    /// <param name="options">Api behaviour options</param>
     private static void ConfigureValidations(ApiBehaviorOptions options)
     {
         options.InvalidModelStateResponseFactory = context =>

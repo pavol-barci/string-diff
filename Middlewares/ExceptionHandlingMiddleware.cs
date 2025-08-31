@@ -4,10 +4,15 @@ using StringDiff.Models;
 
 namespace StringDiff.Middlewares;
 
+/// <summary>
+/// Middleware to handle all exception and return custom global error response
+/// </summary>
+/// <param name="logger">Logger instance for the middleware</param>
 public class ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddleware> logger) : IMiddleware
 {
     private record ErrorWithStatusCode(HttpStatusCode StatusCode, ErrorResponse Body);
     
+    /// <inheritdoc/>
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         try
@@ -20,6 +25,12 @@ public class ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddleware> lo
         }
     }
 
+    /// <summary>
+    /// Handle exception. This will log the exception and based on its type
+    /// set specific response code with error object from the API
+    /// </summary>
+    /// <param name="context">Current http context</param>
+    /// <param name="exception">Current thrown exception</param>
     private async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {        
         logger.LogError(exception, exception.Message);
