@@ -22,7 +22,7 @@ public static class ServiceCollectionExtensions
     {
         if (environment.IsDevelopment())
         {
-            services.AddScoped<IDiffRepository, DiffInMemoryRepository>();   
+            services.AddSingleton<IDiffRepository, DiffInMemoryRepository>();   
         }
         else
         {

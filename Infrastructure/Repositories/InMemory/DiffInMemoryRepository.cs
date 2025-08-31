@@ -29,9 +29,6 @@ public class DiffInMemoryRepository : IDiffRepository
 
     public Task<DiffModel> Create(DiffModel model)
     {
-        var nextKey = Data.Keys.Max() + 1;
-        model.Id = nextKey;
-        
         if (Data.TryAdd(model.Id, model) is false)
         {
             throw new ConflictException($"Model with id {model.Id} already exists");

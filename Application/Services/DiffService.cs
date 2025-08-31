@@ -44,6 +44,8 @@ public class DiffService(IDiffRepository diffRepository, IDiffCalculator diffCal
         {
             created = true;
             model = createFunction();
+            model.Id = id;
+            
             await diffRepository.Create(model);
         }
         else
