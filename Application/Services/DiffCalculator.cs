@@ -2,10 +2,12 @@ using StringDiff.Domain;
 
 namespace StringDiff.Application.Services;
 
+///<inheritdoc/>
 public class DiffCalculator(ILogger<DiffCalculator> logger) : IDiffCalculator
 {
     private record ComparisonResult(bool Same, int Offset = 0, int Length = 0);
 
+    ///<inheritdoc/>
     public Task<DiffResult?> CalculateDiff(DiffModel model)
     {
         if (model.Left is null || model.Right is null)
@@ -26,8 +28,16 @@ public class DiffCalculator(ILogger<DiffCalculator> logger) : IDiffCalculator
             : new DiffResult(DiffResultType.NotEquals, compareResult.Offset, compareResult.Length);
 
         return Task.FromResult<DiffResult?>(diffResult);
-}
+    }
 
+    /// <summary>
+    /// Compare the models left and right strings. 
+    /// </summary>
+    /// <param name="model">Input model to compare with already filled Left and Right strings</param>
+    /// <returns>
+    ///     <see cref="ComparisonResult"/> containing the result of compare. Same = <c>true</c> when they are same,
+    ///     <c>false</c> with Offset and Length otherwise
+    /// </returns>
     private static ComparisonResult CompareModel(DiffModel model)
     {
         var length = model.Left!.Length;

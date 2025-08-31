@@ -8,6 +8,7 @@ public enum DiffResultResponseType
     NotFinished = 3
 }
 
+
 public record DiffResultResponse(DiffResultResponseType Result)
 {
     public DiffResultResponseType Result { get; set; } = Result;

@@ -6,6 +6,11 @@ namespace StringDiff.Application.Helpers;
 
 public static class Mapper
 {
+    /// <summary>
+    /// Transform domain object into application (DTO) object
+    /// </summary>
+    /// <param name="diffResult"></param>
+    /// <returns>Web API response DTO</returns>
     public static DiffResultResponse ToDiffResultResponse(this DiffResult? diffResult)
     {
         if (diffResult is null)
