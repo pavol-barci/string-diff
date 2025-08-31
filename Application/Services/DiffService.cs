@@ -2,7 +2,7 @@ using StringDiff.Application.Helpers;
 using StringDiff.Application.Models;
 using StringDiff.Domain;
 using StringDiff.Infrastructure;
-using StringDiff.Objects;
+using StringDiff.Models;
 
 namespace StringDiff.Application.Services;
 

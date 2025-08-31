@@ -1,9 +1,13 @@
 using System.Net;
+using StringDiff.Infrastructure.Exceptions;
+using StringDiff.Models;
 
 namespace StringDiff.Middlewares;
 
 public class ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddleware> logger) : IMiddleware
 {
+    private record ErrorWithStatusCode(HttpStatusCode StatusCode, ErrorResponse Body);
+    
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         try
@@ -18,17 +22,17 @@ public class ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddleware> lo
 
     private async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {        
-        //TODO> if not found,mmissing etc handle in controller, here really handle non common scenarios 
+        logger.LogError(exception, exception.Message);
 
-        context.Response.ContentType = "application/json";
-
-        var response = new
+        var response = exception switch
         {
-            StatusCode = HttpStatusCode.InternalServerError,
-            Error = "Error occured."
+            NotFoundException => new ErrorWithStatusCode(HttpStatusCode.NotFound, new ErrorResponse(exception.Message)),
+            ConflictException => new ErrorWithStatusCode(HttpStatusCode.Conflict, new ErrorResponse(exception.Message)),
+            _ => new ErrorWithStatusCode(HttpStatusCode.InternalServerError, new ErrorResponse(exception.Message))
         };
-        
+
+        context.Response.ContentType = "application/json";        
         context.Response.StatusCode = (int)response.StatusCode;
-        await context.Response.WriteAsJsonAsync(response);
+        await context.Response.WriteAsJsonAsync(response.Body);
     }
 }

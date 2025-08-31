@@ -1,7 +1,7 @@
 using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
 using StringDiff.Application;
-using StringDiff.Objects;
+using StringDiff.Models;
 
 namespace StringDiff.Controllers;
 
@@ -12,9 +12,9 @@ public class DiffV1Controller(IDiffService diffService, ILogger<DiffV1Controller
     [HttpPut("{id:int}/left")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ErrorResponse))]
     public async Task<IActionResult> AddLeftString([FromRoute] int id, [FromBody] DiffRequest diffRequest)
     {
         var created = await diffService.UpsertLeft(id, diffRequest);
@@ -24,9 +24,9 @@ public class DiffV1Controller(IDiffService diffService, ILogger<DiffV1Controller
     [HttpPut("{id:int}/right")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ErrorResponse))]
     public async Task<IActionResult> AddRightString([FromRoute] int id, [FromBody] DiffRequest diffRequest)
     {
         var created = await diffService.UpsertRight(id, diffRequest);
@@ -34,8 +34,8 @@ public class DiffV1Controller(IDiffService diffService, ILogger<DiffV1Controller
     }
 
     [HttpGet("{id:int}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DiffResponse))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
     [Produces(MediaTypeNames.Application.Json)]
     public async Task<IActionResult> GetDiffResult([FromRoute] int id)
     {

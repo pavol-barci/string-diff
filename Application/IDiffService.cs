@@ -1,5 +1,5 @@
 using StringDiff.Application.Models;
-using StringDiff.Objects;
+using StringDiff.Models;
 
 namespace StringDiff.Application;
 

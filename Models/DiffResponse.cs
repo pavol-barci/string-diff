@@ -1,4 +1,4 @@
-namespace StringDiff.Objects;
+namespace StringDiff.Models;
 
 public enum DiffResult
 {

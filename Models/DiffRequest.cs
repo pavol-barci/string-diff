@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace StringDiff.Objects;
+namespace StringDiff.Models;
 
 public class DiffRequest
 {
