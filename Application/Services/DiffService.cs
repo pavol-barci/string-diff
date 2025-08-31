@@ -1,6 +1,8 @@
-using System.Security.Cryptography;
+using StringDiff.Application.Helpers;
+using StringDiff.Application.Models;
 using StringDiff.Domain;
 using StringDiff.Infrastructure;
+using StringDiff.Objects;
 
 namespace StringDiff.Application.Services;
 
@@ -8,24 +10,29 @@ public class DiffService(IDiffRepository diffRepository, IDiffCalculator diffCal
     : IDiffService
 {
 
-    public async Task<bool> UpsertLeft(int id, string left)
+    public async Task<bool> UpsertLeft(int id, DiffRequest diffRequest)
     {
-        return await UpsertInternal(id, diffModel => diffModel.Left = left, () => new DiffModel(left));
+        return await UpsertInternal(id, diffModel => diffModel.Left = diffRequest.Input, () => new DiffModel(diffRequest.Input));
     }
 
-    public async Task<bool> UpsertRight(int id, string right)
+    public async Task<bool> UpsertRight(int id, DiffRequest diffRequest)
     {
-        return await UpsertInternal(id, diffModel => diffModel.Right = right, () => new DiffModel(right: right));
+        return await UpsertInternal(id, diffModel => diffModel.Right = diffRequest.Input, () => new DiffModel(right: diffRequest.Input));
     }
 
-    public async Task GetDiff(int id)
+    public async Task<DiffResultResponse?> GetDiff(int id)
     {
         var model = await diffRepository.GetById(id);
         
-        //TODO> if model null => not found, if result null, not finished? 
+        //TODO> if model null => not found, if result null, not finished?
+        if (model is null)
+        {
+            logger.LogWarning("Diff result with id {id} does not exists.", id);
+            return null;
+        }
         
-        // return model.DiffResult.ToDiffResultResponse();
         
+        return model.DiffResult.ToDiffResultResponse();
     }
 
     private async Task<bool> UpsertInternal(int id, Action<DiffModel> updateAction, Func<DiffModel> createFunction)
@@ -53,15 +60,5 @@ public class DiffService(IDiffRepository diffRepository, IDiffCalculator diffCal
         await diffRepository.Update(model);
 
         return created;
-    }
-}
-
-public class DiffResultResponse
-{
-    public string? Result { get; set; }
-
-    public DiffResultResponse(string? result)
-    {
-        Result = result;
     }
 }
