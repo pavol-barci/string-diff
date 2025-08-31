@@ -2,6 +2,7 @@ using StringDiff.Application.Helpers;
 using StringDiff.Application.Models;
 using StringDiff.Domain;
 using StringDiff.Infrastructure;
+using StringDiff.Infrastructure.Exceptions;
 using StringDiff.Models;
 
 namespace StringDiff.Application.Services;
@@ -24,13 +25,11 @@ public class DiffService(IDiffRepository diffRepository, IDiffCalculator diffCal
     {
         var model = await diffRepository.GetById(id);
         
-        //TODO> if model null => not found, if result null, not finished?
         if (model is null)
         {
             logger.LogWarning("Diff result with id {id} does not exists.", id);
-            return null;
+            throw new NotFoundException($"Model with id {id} does not exists.");
         }
-        
         
         return model.DiffResult.ToDiffResultResponse();
     }

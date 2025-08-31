@@ -1,6 +1,7 @@
 using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
 using StringDiff.Application;
+using StringDiff.Application.Models;
 using StringDiff.Models;
 
 namespace StringDiff.Controllers;
@@ -34,19 +35,12 @@ public class DiffV1Controller(IDiffService diffService, ILogger<DiffV1Controller
     }
 
     [HttpGet("{id:int}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DiffResponse))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DiffResultResponse))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
     [Produces(MediaTypeNames.Application.Json)]
     public async Task<IActionResult> GetDiffResult([FromRoute] int id)
     {
         var result = await diffService.GetDiff(id);
-
-        //TODO> here or exception?
-        if (result is null)
-        {
-            return NotFound();
-        }
-
         return Ok(result);
     }
 

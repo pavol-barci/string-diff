@@ -1,12 +1,22 @@
 namespace StringDiff.Application.Models;
 
-public class DiffResultResponse
+public enum DiffResultResponseType
 {
-    
-    public string? Result { get; set; }
+    Equal = 0,
+    DifferentSize = 1,
+    NotEquals = 2,
+    NotFinished = 3
+}
 
-    public DiffResultResponse(string? result)
+public record DiffResultResponse(DiffResultResponseType Result)
+{
+    public DiffResultResponseType Result { get; set; } = Result;
+    public Difference? Difference { get; set; }
+
+    public DiffResultResponse(DiffResultResponseType result, Difference difference) : this(result)
     {
-        Result = result;
+        Difference = difference;
     }
 }
+
+public record Difference(int Offset, int Length);
