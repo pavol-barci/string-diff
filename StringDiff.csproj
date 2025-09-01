@@ -16,6 +16,7 @@
       <Compile Remove="StringDiff.Domain\**" />
       <Compile Remove="StringDiff.Contracts\**" />
       <Compile Remove="StringDiff.Application.Abstraction\**" />
+      <Compile Remove="StringDiff.Application\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -23,6 +24,7 @@
       <EmbeddedResource Remove="StringDiff.Domain\**" />
       <EmbeddedResource Remove="StringDiff.Contracts\**" />
       <EmbeddedResource Remove="StringDiff.Application.Abstraction\**" />
+      <EmbeddedResource Remove="StringDiff.Application\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -30,6 +32,7 @@
       <Content Remove="StringDiff.Domain\**" />
       <Content Remove="StringDiff.Contracts\**" />
       <Content Remove="StringDiff.Application.Abstraction\**" />
+      <Content Remove="StringDiff.Application\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -37,6 +40,7 @@
       <None Remove="StringDiff.Domain\**" />
       <None Remove="StringDiff.Contracts\**" />
       <None Remove="StringDiff.Application.Abstraction\**" />
+      <None Remove="StringDiff.Application\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -55,10 +59,14 @@
       <_ContentIncludedByDefault Remove="StringDiff.Application.Abstraction\obj\project.assets.json" />
       <_ContentIncludedByDefault Remove="StringDiff.Application.Abstraction\obj\project.packagespec.json" />
       <_ContentIncludedByDefault Remove="StringDiff.Application.Abstraction\obj\StringDiff.Application.Abstraction.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Application\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Application\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Application\obj\StringDiff.Application.csproj.nuget.dgspec.json" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="StringDiff.Application.Abstraction\StringDiff.Application.Abstraction.csproj" />
+      <ProjectReference Include="StringDiff.Application\StringDiff.Application.csproj" />
       <ProjectReference Include="StringDiff.Contracts\StringDiff.Contracts.csproj" />
       <ProjectReference Include="StringDiff.Domain\StringDiff.Domain.csproj" />
     </ItemGroup>
