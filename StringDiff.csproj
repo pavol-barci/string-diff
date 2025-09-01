@@ -17,6 +17,7 @@
       <Compile Remove="StringDiff.Contracts\**" />
       <Compile Remove="StringDiff.Application.Abstraction\**" />
       <Compile Remove="StringDiff.Application\**" />
+      <Compile Remove="StringDiff.Infrastructure\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -25,6 +26,7 @@
       <EmbeddedResource Remove="StringDiff.Contracts\**" />
       <EmbeddedResource Remove="StringDiff.Application.Abstraction\**" />
       <EmbeddedResource Remove="StringDiff.Application\**" />
+      <EmbeddedResource Remove="StringDiff.Infrastructure\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -33,6 +35,7 @@
       <Content Remove="StringDiff.Contracts\**" />
       <Content Remove="StringDiff.Application.Abstraction\**" />
       <Content Remove="StringDiff.Application\**" />
+      <Content Remove="StringDiff.Infrastructure\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -41,6 +44,7 @@
       <None Remove="StringDiff.Contracts\**" />
       <None Remove="StringDiff.Application.Abstraction\**" />
       <None Remove="StringDiff.Application\**" />
+      <None Remove="StringDiff.Infrastructure\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -62,6 +66,9 @@
       <_ContentIncludedByDefault Remove="StringDiff.Application\obj\project.assets.json" />
       <_ContentIncludedByDefault Remove="StringDiff.Application\obj\project.packagespec.json" />
       <_ContentIncludedByDefault Remove="StringDiff.Application\obj\StringDiff.Application.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Infrastructure\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Infrastructure\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Infrastructure\obj\StringDiff.Infrastructure.csproj.nuget.dgspec.json" />
     </ItemGroup>
 
     <ItemGroup>
@@ -69,6 +76,7 @@
       <ProjectReference Include="StringDiff.Application\StringDiff.Application.csproj" />
       <ProjectReference Include="StringDiff.Contracts\StringDiff.Contracts.csproj" />
       <ProjectReference Include="StringDiff.Domain\StringDiff.Domain.csproj" />
+      <ProjectReference Include="StringDiff.Infrastructure\StringDiff.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

@@ -21,6 +21,7 @@
     <ItemGroup>
       <ProjectReference Include="..\StringDiff.Application.Abstraction\StringDiff.Application.Abstraction.csproj" />
       <ProjectReference Include="..\StringDiff.csproj" />
+      <ProjectReference Include="..\StringDiff.Infrastructure\StringDiff.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
