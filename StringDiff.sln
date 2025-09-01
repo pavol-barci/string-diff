@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringDiff.Application", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringDiff.Infrastructure", "StringDiff.Infrastructure\StringDiff.Infrastructure.csproj", "{767F0050-3232-422F-A162-1046B2ABAF41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringDiff.IntegrationTests", "StringDiff.IntegrationTests\StringDiff.IntegrationTests.csproj", "{D9A2E456-5B30-4B27-8914-EB9D3BAE0221}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,5 +55,9 @@ Global
 		{767F0050-3232-422F-A162-1046B2ABAF41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{767F0050-3232-422F-A162-1046B2ABAF41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{767F0050-3232-422F-A162-1046B2ABAF41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9A2E456-5B30-4B27-8914-EB9D3BAE0221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9A2E456-5B30-4B27-8914-EB9D3BAE0221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9A2E456-5B30-4B27-8914-EB9D3BAE0221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9A2E456-5B30-4B27-8914-EB9D3BAE0221}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

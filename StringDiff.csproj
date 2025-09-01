@@ -18,6 +18,7 @@
       <Compile Remove="StringDiff.Application.Abstraction\**" />
       <Compile Remove="StringDiff.Application\**" />
       <Compile Remove="StringDiff.Infrastructure\**" />
+      <Compile Remove="StringDiff.IntegrationTests\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -27,6 +28,7 @@
       <EmbeddedResource Remove="StringDiff.Application.Abstraction\**" />
       <EmbeddedResource Remove="StringDiff.Application\**" />
       <EmbeddedResource Remove="StringDiff.Infrastructure\**" />
+      <EmbeddedResource Remove="StringDiff.IntegrationTests\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -36,6 +38,7 @@
       <Content Remove="StringDiff.Application.Abstraction\**" />
       <Content Remove="StringDiff.Application\**" />
       <Content Remove="StringDiff.Infrastructure\**" />
+      <Content Remove="StringDiff.IntegrationTests\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -45,6 +48,7 @@
       <None Remove="StringDiff.Application.Abstraction\**" />
       <None Remove="StringDiff.Application\**" />
       <None Remove="StringDiff.Infrastructure\**" />
+      <None Remove="StringDiff.IntegrationTests\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -69,6 +73,9 @@
       <_ContentIncludedByDefault Remove="StringDiff.Infrastructure\obj\project.assets.json" />
       <_ContentIncludedByDefault Remove="StringDiff.Infrastructure\obj\project.packagespec.json" />
       <_ContentIncludedByDefault Remove="StringDiff.Infrastructure\obj\StringDiff.Infrastructure.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.IntegrationTests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.IntegrationTests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.IntegrationTests\obj\StringDiff.IntegrationTests.csproj.nuget.dgspec.json" />
     </ItemGroup>
 
     <ItemGroup>
