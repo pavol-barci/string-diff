@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Text;
+using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
 using StringDiff.Application.Abstraction.Services;
@@ -65,13 +66,15 @@ public class DiffServiceTests
     [Fact]
     public async Task UpsertLeft_ModelUpdated_ReturnsFalse()
     {
+        var input = "string";
+        var encoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(input));
         _diffRepositoryMock.Setup(o => o.GetById(It.IsAny<Guid>())).ReturnsAsync((Guid id) => new DiffModel
         {
             Id = id
         });
         var request = new DiffRequest
         {
-            Input = "string"
+            Input = encoded
         };
         var id = Guid.NewGuid();
 
@@ -79,59 +82,65 @@ public class DiffServiceTests
 
         result.Should().BeFalse();
         _diffRepositoryMock.Verify(o => o.Create(It.IsAny<DiffModel>()), Times.Never);
-        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Left == request.Input)));
+        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Left == input)));
         _diffCalculatorMock.Verify(o => o.CalculateDiff(It.IsAny<DiffModel>()), Times.Never);
     }
     
     [Fact]
     public async Task UpsertLeft_ModelCreated_ReturnsTrue()
     {
+        var input = "string";
+        var encoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(input));
         var request = new DiffRequest
         {
-            Input = "string"
+            Input = encoded
         };
         var id = Guid.NewGuid();
 
         var result = await _diffService.UpsertLeft(id, request);
 
         result.Should().BeTrue();
-        _diffRepositoryMock.Verify(o => o.Create(It.Is<DiffModel>(model => model.Id == id && model.Left == request.Input)));
-        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Left == request.Input))); 
+        _diffRepositoryMock.Verify(o => o.Create(It.Is<DiffModel>(model => model.Id == id && model.Left == input)));
+        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Left == input))); 
         _diffCalculatorMock.Verify(o => o.CalculateDiff(It.IsAny<DiffModel>()), Times.Never);
     }
     
     [Fact]
     public async Task UpsertLeft_ModelFullyFilled_CalculatesDiffAndReturnsTrue()
     {
+        var input = "string";
+        var encoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(input));
         _diffRepositoryMock.Setup(o => o.GetById(It.IsAny<Guid>())).ReturnsAsync((Guid id) => new DiffModel
         {
             Id = id,
-            Right = "string"
+            Right = input
         });
         var request = new DiffRequest
         {
-            Input = "string"
+            Input = encoded
         };
         var id = Guid.NewGuid();
 
         var result = await _diffService.UpsertLeft(id, request);
 
         result.Should().BeFalse();
-        _diffCalculatorMock.Verify(o => o.CalculateDiff(It.Is<DiffModel>(model => model.Id == id && model.Left == request.Input && model.Right == "string")), Times.Once);
-        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Left == request.Input)), Times.Once);
-        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Left == request.Input)), Times.Once);
+        _diffCalculatorMock.Verify(o => o.CalculateDiff(It.Is<DiffModel>(model => model.Id == id && model.Left == input && model.Right == "string")), Times.Once);
+        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Left == input)), Times.Once);
+        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Left == input)), Times.Once);
     }
     
     [Fact]
     public async Task UpsertRight_ModelUpdated_ReturnsFalse()
     {
+        var input = "string";
+        var encoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(input));
         _diffRepositoryMock.Setup(o => o.GetById(It.IsAny<Guid>())).ReturnsAsync((Guid id) => new DiffModel
         {
             Id = id
         });
         var request = new DiffRequest
         {
-            Input = "string"
+            Input = encoded
         };
         var id = Guid.NewGuid();
 
@@ -139,46 +148,50 @@ public class DiffServiceTests
 
         result.Should().BeFalse();
         _diffRepositoryMock.Verify(o => o.Create(It.IsAny<DiffModel>()), Times.Never);
-        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Right == request.Input)));
+        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Right == input)));
         _diffCalculatorMock.Verify(o => o.CalculateDiff(It.IsAny<DiffModel>()), Times.Never);
     }
     
     [Fact]
     public async Task UpsertRight_ModelCreated_ReturnsTrue()
     {
+        var input = "string";
+        var encoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(input));
         var request = new DiffRequest
         {
-            Input = "string"
+            Input = encoded
         };
         var id = Guid.NewGuid();
 
         var result = await _diffService.UpsertRight(id, request);
 
         result.Should().BeTrue();
-        _diffRepositoryMock.Verify(o => o.Create(It.Is<DiffModel>(model => model.Id == id && model.Right == request.Input)));
-        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Right == request.Input)));
+        _diffRepositoryMock.Verify(o => o.Create(It.Is<DiffModel>(model => model.Id == id && model.Right == input)));
+        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Right == input)));
         _diffCalculatorMock.Verify(o => o.CalculateDiff(It.IsAny<DiffModel>()), Times.Never);
     }
     
     [Fact]
     public async Task UpsertRight_ModelFullyFilled_CalculatesDiffAndReturnsTrue()
     {
+        var input = "string";
+        var encoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(input));
         _diffRepositoryMock.Setup(o => o.GetById(It.IsAny<Guid>())).ReturnsAsync((Guid id) => new DiffModel
         {
             Id = id,
-            Left = "string"
+            Left = input
         });
         var request = new DiffRequest
         {
-            Input = "string"
+            Input = encoded
         };
         var id = Guid.NewGuid();
 
         var result = await _diffService.UpsertRight(id, request);
 
         result.Should().BeFalse();
-        _diffCalculatorMock.Verify(o => o.CalculateDiff(It.Is<DiffModel>(model => model.Id == id && model.Right == request.Input && model.Left == "string")), Times.Once);
-        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Right == request.Input)), Times.Once);
-        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Right == request.Input)), Times.Once);
+        _diffCalculatorMock.Verify(o => o.CalculateDiff(It.Is<DiffModel>(model => model.Id == id && model.Right == input && model.Left == "string")), Times.Once);
+        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Right == input)), Times.Once);
+        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Right == input)), Times.Once);
     }
 }

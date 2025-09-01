@@ -1,3 +1,4 @@
+using System.Text;
 using Microsoft.Extensions.Logging;
 using StringDiff.Application.Abstraction.Services;
 using StringDiff.Application.Helpers;
@@ -12,17 +13,18 @@ namespace StringDiff.Application.Services;
 public class DiffService(IDiffRepository diffRepository, IDiffCalculator diffCalculator, ILogger<DiffService> logger)
     : IDiffService
 {
-
     ///<inheritdoc/>
     public async Task<bool> UpsertLeft(Guid id, DiffRequest diffRequest)
     {
-        return await UpsertInternal(id, diffModel => diffModel.Left = diffRequest.Input, () => new DiffModel(diffRequest.Input));
+        var decodedInput = DecodeInput(diffRequest);
+        return await UpsertInternal(id, diffModel => diffModel.Left = decodedInput, () => new DiffModel(decodedInput));
     }
 
     ///<inheritdoc/>
     public async Task<bool> UpsertRight(Guid id, DiffRequest diffRequest)
     {
-        return await UpsertInternal(id, diffModel => diffModel.Right = diffRequest.Input, () => new DiffModel(right: diffRequest.Input));
+        var decodedInput = DecodeInput(diffRequest);
+        return await UpsertInternal(id, diffModel => diffModel.Right = decodedInput, () => new DiffModel(right: decodedInput));
     }
 
     ///<inheritdoc/>
@@ -78,4 +80,12 @@ public class DiffService(IDiffRepository diffRepository, IDiffCalculator diffCal
 
         return created;
     }
+    
+    /// <summary>
+    /// Decode the input base64 string to string
+    /// </summary>
+    /// <param name="diffRequest">Request containing base64 input </param>
+    /// <returns>Decoded string from base64</returns>
+    private static string DecodeInput(DiffRequest diffRequest) =>
+        Encoding.UTF8.GetString(Convert.FromBase64String(diffRequest.Input));
 }

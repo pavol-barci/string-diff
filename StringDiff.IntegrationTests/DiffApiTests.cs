@@ -59,7 +59,7 @@ public class DiffApiTests
         var id = Guid.NewGuid();
         var request = new
         {
-            input = "string"
+            input = Convert.ToBase64String("stkkjg"u8.ToArray())
         };
 
         var response = await _client.PutAsync($"diff/v1/{id}/{path}", JsonContent.Create(request));
@@ -75,7 +75,7 @@ public class DiffApiTests
         var id = Guid.NewGuid();
         var request = new
         {
-            input = "string"
+            input = Convert.ToBase64String("stkkjg"u8.ToArray())
         };
         await _client.PutAsync($"diff/v1/{id}/{path}", JsonContent.Create(request));
         
@@ -93,7 +93,7 @@ public class DiffApiTests
         var id = Guid.NewGuid();
         var request = new
         {
-            input = "string"
+            input = Convert.ToBase64String("stkkjg"u8.ToArray())
         };
         await _client.PutAsync($"diff/v1/{id}/{path}", JsonContent.Create(request));
         
@@ -115,7 +115,7 @@ public class DiffApiTests
         var id = Guid.NewGuid();
         var request = new
         {
-            input = "string"
+            input = Convert.ToBase64String("string"u8.ToArray())
         };
         await _client.PutAsync($"diff/v1/{id}/left", JsonContent.Create(request));
         await _client.PutAsync($"diff/v1/{id}/right", JsonContent.Create(request));
@@ -130,5 +130,48 @@ public class DiffApiTests
         successResponse.Should().NotBeNull();
         successResponse.Result.Should().Be(DiffResultResponseType.Equal);
         successResponse.Difference.Should().BeNull();
+    }
+
+    [Fact]
+    public async Task DiffV1_GetFinishedThenUpdateAgain_ReturnsOkResponseWithResult()
+    {
+        var id = Guid.NewGuid();
+        var request = new
+        {
+            input = Convert.ToBase64String("string"u8.ToArray())
+        };
+        await _client.PutAsync($"diff/v1/{id}/left", JsonContent.Create(request));
+        await _client.PutAsync($"diff/v1/{id}/right", JsonContent.Create(request));
+        
+        var response = await _client.GetAsync($"diff/v1/{id}");
+
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        var contentString = await response.Content.ReadAsStringAsync();
+        var successResponse = JsonConvert.DeserializeObject<DiffResultResponse>(contentString);
+
+        successResponse.Should().NotBeNull();
+        successResponse.Result.Should().Be(DiffResultResponseType.Equal);
+        successResponse.Difference.Should().BeNull();
+        
+        request = new
+        {
+            input = Convert.ToBase64String("stkkjg"u8.ToArray())
+        };
+        
+        await _client.PutAsync($"diff/v1/{id}/right", JsonContent.Create(request));
+        
+        response = await _client.GetAsync($"diff/v1/{id}");
+
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        contentString = await response.Content.ReadAsStringAsync();
+        successResponse = JsonConvert.DeserializeObject<DiffResultResponse>(contentString);
+
+        successResponse.Should().NotBeNull();
+        successResponse.Result.Should().Be(DiffResultResponseType.NotEquals);
+        successResponse.Difference.Should().NotBeNull();
+        successResponse.Difference.Offset.Should().Be(2);
+        successResponse.Difference.Length.Should().Be(4);
     }
 }

@@ -1,6 +1,24 @@
 @StringDiff_HostAddress = http://localhost:5105
+@id = 6d62f132-6646-4fb7-abdb-a6ec27aaec0c
 
-GET {{StringDiff_HostAddress}}/weatherforecast/
+### Create or update LEFT string
+PUT {{StringDiff_HostAddress}}/diff/v1/{{id}}/left
+Content-Type: application/json
 Accept: application/json
 
-###
+{
+  "input": "YWFhMTExYmJi"
+}
+
+### Create or update RIGHT string
+PUT {{StringDiff_HostAddress}}/diff/v1/{{id}}/right
+Content-Type: application/json
+Accept: application/json
+
+{
+  "input": "YWFhMjIyY2Nj"
+}
+
+### Get the diff result
+GET {{StringDiff_HostAddress}}/diff/v1/{{id}}
+Accept: application/json
