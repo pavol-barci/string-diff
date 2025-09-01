@@ -2,6 +2,7 @@ using FluentAssertions;
 using StringDiff.Application.Helpers;
 using StringDiff.Application.Models;
 using StringDiff.Domain;
+using StringDiff.Domain.Models;
 using Xunit;
 
 namespace StringDiff.Tests.ApplicationTests;

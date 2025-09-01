@@ -1,6 +1,6 @@
 using StringDiff.Application.Models;
+using StringDiff.Domain.Exceptions;
 using StringDiff.Models;
-using StringDiff.Infrastructure.Exceptions;
 
 namespace StringDiff.Application;
 

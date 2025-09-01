@@ -13,18 +13,22 @@
 
     <ItemGroup>
       <Compile Remove="StringDiff.Tests\**" />
+      <Compile Remove="StringDiff.Domain\**" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Remove="StringDiff.Tests\**" />
+      <EmbeddedResource Remove="StringDiff.Domain\**" />
     </ItemGroup>
 
     <ItemGroup>
       <Content Remove="StringDiff.Tests\**" />
+      <Content Remove="StringDiff.Domain\**" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="StringDiff.Tests\**" />
+      <None Remove="StringDiff.Domain\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -34,6 +38,13 @@
       <_ContentIncludedByDefault Remove="StringDiff.Tests\obj\project.assets.json" />
       <_ContentIncludedByDefault Remove="StringDiff.Tests\obj\project.packagespec.json" />
       <_ContentIncludedByDefault Remove="StringDiff.Tests\obj\StringDiff.Tests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Domain\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Domain\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Domain\obj\StringDiff.Domain.csproj.nuget.dgspec.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="StringDiff.Domain\StringDiff.Domain.csproj" />
     </ItemGroup>
 
 </Project>

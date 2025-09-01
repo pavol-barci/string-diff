@@ -1,6 +1,7 @@
 using StringDiff.Application.Models;
 using StringDiff.Domain;
-using DiffResult = StringDiff.Domain.DiffResult;
+using StringDiff.Domain.Models;
+using DiffResult = StringDiff.Domain.Models.DiffResult;
 
 namespace StringDiff.Application.Helpers;
 

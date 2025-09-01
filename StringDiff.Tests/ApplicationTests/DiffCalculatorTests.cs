@@ -4,6 +4,7 @@ using Moq;
 using StringDiff.Application;
 using StringDiff.Application.Services;
 using StringDiff.Domain;
+using StringDiff.Domain.Models;
 using Xunit;
 
 namespace StringDiff.Tests.ApplicationTests;

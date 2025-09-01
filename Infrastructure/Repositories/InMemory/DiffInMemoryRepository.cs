@@ -1,5 +1,7 @@
 using StringDiff.Domain;
-using StringDiff.Infrastructure.Exceptions;
+using StringDiff.Domain.Exceptions;
+using StringDiff.Domain.Models;
+using StringDiff.Domain.Repositories;
 
 namespace StringDiff.Infrastructure.Repositories.InMemory;
 

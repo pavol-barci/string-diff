@@ -43,6 +43,11 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+**/[Bb]in/
+**/[Oo]bj/
+obj/
+bin/
+
 
 # Visual Studo 2015 cache/options directory
 .vs/
@@ -225,3 +230,6 @@ __pycache__/
 
 # Windows thumbnail cache files
 Thumbs.db
+obj/rider.project.restore.info
+obj/Debug/net8.0/StringDiff.AssemblyInfo.cs
+obj/Debug/net8.0/StringDiff.AssemblyInfoInputs.cache

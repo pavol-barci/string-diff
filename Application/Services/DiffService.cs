@@ -1,8 +1,10 @@
 using StringDiff.Application.Helpers;
 using StringDiff.Application.Models;
 using StringDiff.Domain;
+using StringDiff.Domain.Exceptions;
+using StringDiff.Domain.Models;
+using StringDiff.Domain.Repositories;
 using StringDiff.Infrastructure;
-using StringDiff.Infrastructure.Exceptions;
 using StringDiff.Models;
 
 namespace StringDiff.Application.Services;

@@ -1,4 +1,5 @@
 using StringDiff.Domain;
+using StringDiff.Domain.Models;
 
 namespace StringDiff.Application;
 

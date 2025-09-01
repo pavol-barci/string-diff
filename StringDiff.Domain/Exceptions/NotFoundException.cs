@@ -1,4 +1,4 @@
-namespace StringDiff.Infrastructure.Exceptions;
+namespace StringDiff.Domain.Exceptions;
 
 /// <summary>
 /// Thrown exception when attempt to get non existent Id from database should fail 

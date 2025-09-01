@@ -1,4 +1,6 @@
 using StringDiff.Domain;
+using StringDiff.Domain.Models;
+using StringDiff.Domain.Repositories;
 
 namespace StringDiff.Infrastructure.Repositories;
 

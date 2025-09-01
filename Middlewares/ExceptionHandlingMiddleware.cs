@@ -1,5 +1,5 @@
 using System.Net;
-using StringDiff.Infrastructure.Exceptions;
+using StringDiff.Domain.Exceptions;
 using StringDiff.Models;
 
 namespace StringDiff.Middlewares;

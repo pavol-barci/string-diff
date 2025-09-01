@@ -1,7 +1,7 @@
-using StringDiff.Domain;
-using StringDiff.Infrastructure.Exceptions;
+using StringDiff.Domain.Exceptions;
+using StringDiff.Domain.Models;
 
-namespace StringDiff.Infrastructure;
+namespace StringDiff.Domain.Repositories;
 
 /// <summary>
 /// Repository with persistance operations on <see cref="DiffModel"/>
