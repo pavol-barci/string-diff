@@ -1,11 +1,9 @@
+using StringDiff.Application.Abstraction.Services;
 using StringDiff.Application.Helpers;
-using StringDiff.Application.Models;
-using StringDiff.Domain;
+using StringDiff.Contracts;
 using StringDiff.Domain.Exceptions;
 using StringDiff.Domain.Models;
 using StringDiff.Domain.Repositories;
-using StringDiff.Infrastructure;
-using StringDiff.Models;
 
 namespace StringDiff.Application.Services;
 

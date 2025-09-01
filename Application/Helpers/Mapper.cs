@@ -1,5 +1,4 @@
-using StringDiff.Application.Models;
-using StringDiff.Domain;
+using StringDiff.Contracts;
 using StringDiff.Domain.Models;
 using DiffResult = StringDiff.Domain.Models.DiffResult;
 

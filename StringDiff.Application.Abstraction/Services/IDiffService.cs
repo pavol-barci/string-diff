@@ -1,8 +1,7 @@
-using StringDiff.Application.Models;
+using StringDiff.Contracts;
 using StringDiff.Domain.Exceptions;
-using StringDiff.Models;
 
-namespace StringDiff.Application;
+namespace StringDiff.Application.Abstraction.Services;
 
 /// <summary>
 /// Service to process input strings and diffs

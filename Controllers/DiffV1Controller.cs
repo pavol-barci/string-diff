@@ -1,8 +1,7 @@
 using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
-using StringDiff.Application;
-using StringDiff.Application.Models;
-using StringDiff.Models;
+using StringDiff.Application.Abstraction.Services;
+using StringDiff.Contracts;
 
 namespace StringDiff.Controllers;
 

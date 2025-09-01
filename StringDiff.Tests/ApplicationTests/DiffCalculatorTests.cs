@@ -1,9 +1,8 @@
 ﻿using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
-using StringDiff.Application;
+using StringDiff.Application.Abstraction.Services;
 using StringDiff.Application.Services;
-using StringDiff.Domain;
 using StringDiff.Domain.Models;
 using Xunit;
 

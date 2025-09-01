@@ -1,6 +1,6 @@
 using System.Net;
+using StringDiff.Contracts;
 using StringDiff.Domain.Exceptions;
-using StringDiff.Models;
 
 namespace StringDiff.Middlewares;
 

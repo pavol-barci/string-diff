@@ -1,4 +1,4 @@
-using StringDiff.Domain;
+using StringDiff.Application.Abstraction.Services;
 using StringDiff.Domain.Models;
 
 namespace StringDiff.Application.Services;

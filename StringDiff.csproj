@@ -14,21 +14,29 @@
     <ItemGroup>
       <Compile Remove="StringDiff.Tests\**" />
       <Compile Remove="StringDiff.Domain\**" />
+      <Compile Remove="StringDiff.Contracts\**" />
+      <Compile Remove="StringDiff.Application.Abstraction\**" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Remove="StringDiff.Tests\**" />
       <EmbeddedResource Remove="StringDiff.Domain\**" />
+      <EmbeddedResource Remove="StringDiff.Contracts\**" />
+      <EmbeddedResource Remove="StringDiff.Application.Abstraction\**" />
     </ItemGroup>
 
     <ItemGroup>
       <Content Remove="StringDiff.Tests\**" />
       <Content Remove="StringDiff.Domain\**" />
+      <Content Remove="StringDiff.Contracts\**" />
+      <Content Remove="StringDiff.Application.Abstraction\**" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="StringDiff.Tests\**" />
       <None Remove="StringDiff.Domain\**" />
+      <None Remove="StringDiff.Contracts\**" />
+      <None Remove="StringDiff.Application.Abstraction\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -41,9 +49,17 @@
       <_ContentIncludedByDefault Remove="StringDiff.Domain\obj\project.assets.json" />
       <_ContentIncludedByDefault Remove="StringDiff.Domain\obj\project.packagespec.json" />
       <_ContentIncludedByDefault Remove="StringDiff.Domain\obj\StringDiff.Domain.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Contracts\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Contracts\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Contracts\obj\StringDiff.Contracts.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Application.Abstraction\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Application.Abstraction\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Application.Abstraction\obj\StringDiff.Application.Abstraction.csproj.nuget.dgspec.json" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="StringDiff.Application.Abstraction\StringDiff.Application.Abstraction.csproj" />
+      <ProjectReference Include="StringDiff.Contracts\StringDiff.Contracts.csproj" />
       <ProjectReference Include="StringDiff.Domain\StringDiff.Domain.csproj" />
     </ItemGroup>
 

@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\StringDiff.Application.Abstraction\StringDiff.Application.Abstraction.csproj" />
       <ProjectReference Include="..\StringDiff.csproj" />
     </ItemGroup>
 

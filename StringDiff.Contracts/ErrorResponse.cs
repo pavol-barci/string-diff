@@ -1,4 +1,4 @@
-namespace StringDiff.Models;
+namespace StringDiff.Contracts;
 
 public class ErrorResponse(string message, IEnumerable<ValidationError>? validationErrors = null)
 {

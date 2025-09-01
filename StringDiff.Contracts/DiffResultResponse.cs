@@ -1,4 +1,4 @@
-namespace StringDiff.Application.Models;
+namespace StringDiff.Contracts;
 
 public enum DiffResultResponseType
 {

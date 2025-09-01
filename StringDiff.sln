@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringDiff.Tests", "StringD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringDiff.Domain", "StringDiff.Domain\StringDiff.Domain.csproj", "{71EB513E-E3A2-4388-B406-FAAEFCD2E3D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringDiff.Application.Abstraction", "StringDiff.Application.Abstraction\StringDiff.Application.Abstraction.csproj", "{73161933-F5B9-4174-BE6A-E54597CE04A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringDiff.Contracts", "StringDiff.Contracts\StringDiff.Contracts.csproj", "{160E3178-655C-48C2-87C0-6432695FF0CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,5 +33,13 @@ Global
 		{71EB513E-E3A2-4388-B406-FAAEFCD2E3D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71EB513E-E3A2-4388-B406-FAAEFCD2E3D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71EB513E-E3A2-4388-B406-FAAEFCD2E3D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73161933-F5B9-4174-BE6A-E54597CE04A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73161933-F5B9-4174-BE6A-E54597CE04A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73161933-F5B9-4174-BE6A-E54597CE04A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73161933-F5B9-4174-BE6A-E54597CE04A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{160E3178-655C-48C2-87C0-6432695FF0CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{160E3178-655C-48C2-87C0-6432695FF0CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{160E3178-655C-48C2-87C0-6432695FF0CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{160E3178-655C-48C2-87C0-6432695FF0CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

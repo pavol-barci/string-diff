@@ -1,12 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using StringDiff.Application;
+using StringDiff.Application.Abstraction.Services;
 using StringDiff.Application.Services;
+using StringDiff.Contracts;
 using StringDiff.Domain.Repositories;
-using StringDiff.Infrastructure;
 using StringDiff.Infrastructure.Repositories;
 using StringDiff.Infrastructure.Repositories.InMemory;
 using StringDiff.Middlewares;
-using StringDiff.Models;
 
 namespace StringDiff.Extensions;
 

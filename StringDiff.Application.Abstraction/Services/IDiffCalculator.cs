@@ -1,7 +1,6 @@
-using StringDiff.Domain;
 using StringDiff.Domain.Models;
 
-namespace StringDiff.Application;
+namespace StringDiff.Application.Abstraction.Services;
 
 /// <summary>
 /// Service to calculate diffs for models

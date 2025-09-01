@@ -1,15 +1,12 @@
 ﻿using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
-using StringDiff.Application;
-using StringDiff.Application.Models;
+using StringDiff.Application.Abstraction.Services;
 using StringDiff.Application.Services;
-using StringDiff.Domain;
+using StringDiff.Contracts;
 using StringDiff.Domain.Exceptions;
 using StringDiff.Domain.Models;
 using StringDiff.Domain.Repositories;
-using StringDiff.Infrastructure;
-using StringDiff.Models;
 using Xunit;
 
 namespace StringDiff.Tests.ApplicationTests;

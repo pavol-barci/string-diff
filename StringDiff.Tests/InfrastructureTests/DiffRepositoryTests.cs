@@ -1,9 +1,7 @@
 using FluentAssertions;
-using StringDiff.Domain;
 using StringDiff.Domain.Exceptions;
 using StringDiff.Domain.Models;
 using StringDiff.Domain.Repositories;
-using StringDiff.Infrastructure;
 using StringDiff.Infrastructure.Repositories.InMemory;
 using Xunit;
 
