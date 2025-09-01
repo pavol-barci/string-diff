@@ -54,4 +54,49 @@ public class DiffCalculator(ILogger<DiffCalculator> logger) : IDiffCalculator
 
         return new ComparisonResult(true);
     }
+
+    /// <summary>
+    /// Example compare method to calculates multiple possible offsets. 
+    /// </summary>
+    /// <param name="model">Input model to compare with already filled Left and Right strings</param>
+    /// <returns>
+    /// </returns>
+    private static (ComparisonResult result, IEnumerable<(int Offset, int Length)> differences) CompareModelWithMultipleDifferences(DiffModel model)
+    {
+        var length = model.Left!.Length;
+        var currentOffset = 0;
+        var currentDiffLength = 0;
+        var calculatingDiff = false;
+        var differences = new List<(int Offset, int Length)>();
+
+        for (var index = 0; index < length; index++)
+        {
+            if (model.Left[index] != model.Right![index])
+            {
+                if (calculatingDiff is false)
+                {
+                    currentOffset = index;
+                    calculatingDiff = true;
+                }
+
+                currentDiffLength++;
+            }
+            else
+            {
+                if (calculatingDiff)
+                {
+                    differences.Add((currentOffset, currentDiffLength));
+                    currentDiffLength = 0;
+                    calculatingDiff = false;
+                }
+            }
+        }
+        
+        if (calculatingDiff)
+        {
+            differences.Add((currentOffset, currentDiffLength));
+        }
+
+        return (new ComparisonResult(differences.Any() is false), differences);
+    }
 }

@@ -22,6 +22,8 @@ The GET endpoint the retrieve results:
 - NotEqual => when there is a difference between strings. 
     - Offset => at which point the difference occurs
     - Length => lenght of the different string
+    - **NOTE:** Here I was not sure so I went with simple calculation. Compare both strings and whenever they begin to differ calculate offset and length. Improvement could be to calculate all differences, like 'aaa111bbb222' and 'aaa333bbb444' would return multiple records Offset = 3, Length = 3 and Offset = 9, Length = 3.
+    So I provided example calculation in ```DiffCalculator.cs``` 
 
 The architecture is example of onion archiecture with 
 - Domain/Contracts => defining models and exceptions, DTOs
