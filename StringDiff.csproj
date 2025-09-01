@@ -11,4 +11,29 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="StringDiff.Tests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="StringDiff.Tests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="StringDiff.Tests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="StringDiff.Tests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="StringDiff.Tests\bin\Debug\net8.0\StringDiff.Tests.deps.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Tests\bin\Debug\net8.0\StringDiff.Tests.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Tests\obj\Debug\net8.0\StringDiff.Tests.sourcelink.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Tests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Tests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="StringDiff.Tests\obj\StringDiff.Tests.csproj.nuget.dgspec.json" />
+    </ItemGroup>
+
 </Project>
