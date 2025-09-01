@@ -23,6 +23,12 @@ The GET endpoint the retrieve results:
     - Offset => at which point the difference occurs
     - Length => lenght of the different string
 
+The architecture is example of onion archiecture with 
+- Domain/Contracts => defining models and exceptions, DTOs
+- Infrastructure => database layer, repositories
+- Application and Application.Abstraction -> Services and helpers, like mapper of objects. Abstraction contains only interfaces
+- StringDiff => basically presentation layer, with API controllers, middlewares etc
+
 ### How to run
 
 The solution is writen in .NET 8.0 using rider. There is a single build configuration ```StringDiff``` which will run the solution locally. In development mode the persistance layer will be in memory database.
@@ -46,7 +52,7 @@ Unit tests can be run inside IDE
 Integration tests can be run also inside IDE but the API needs to be running locally usin the ```StringDiff``` build configuration
 
 
-## Liamitations
+## Limitations
 
 Current solution have a few limitations. 
 
