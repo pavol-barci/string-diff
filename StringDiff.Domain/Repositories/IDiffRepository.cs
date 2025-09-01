@@ -16,7 +16,7 @@ public interface IDiffRepository
     ///     null => when model with specified Id does not exist
     ///     <see cref="DiffModel"/> => when model successfully loaded
     /// </returns>
-    Task<DiffModel?> GetById(int id);
+    Task<DiffModel?> GetById(Guid id);
     
     /// <summary>
     /// Update specified <see cref="DiffModel"/> 

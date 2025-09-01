@@ -7,10 +7,10 @@ namespace StringDiff.Infrastructure.Repositories.InMemory;
 /// <inheritdoc/>
 public class DiffInMemoryRepository : IDiffRepository
 {
-    private Dictionary<int, DiffModel> Data { get; set; } = new();
+    private Dictionary<Guid, DiffModel> Data { get; set; } = new();
     
     /// <inheritdoc/>
-    public Task<DiffModel?> GetById(int id)
+    public Task<DiffModel?> GetById(Guid id)
     {
         return Data.TryGetValue(id, out var model) is false
             ? Task.FromResult<DiffModel?>(null)

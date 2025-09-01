@@ -2,7 +2,7 @@ namespace StringDiff.Domain.Models;
 
 public class DiffModel
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string? Left { get; set; }
     public string? Right { get; set; }
     public DiffResult? DiffResult { get; set; }

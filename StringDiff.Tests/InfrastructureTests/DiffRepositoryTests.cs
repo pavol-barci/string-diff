@@ -14,7 +14,7 @@ public class DiffRepositoryTests
     [Fact]
     public async Task GetById_ModelNotFound_ReturnsNull()
     {
-        var model = await _diffRepository.GetById(1);
+        var model = await _diffRepository.GetById(Guid.NewGuid());
 
         model.Should().BeNull();
     }
@@ -22,10 +22,11 @@ public class DiffRepositoryTests
     [Fact]
     public async Task GetById_ModelFound_ReturnsModel()
     {
-        var diffModel = new DiffModel{Id = 1, Left = "string"};
+        var id = Guid.NewGuid();
+        var diffModel = new DiffModel{Id = id, Left = "string"};
         await _diffRepository.Create(diffModel);
         
-        var model = await _diffRepository.GetById(1);
+        var model = await _diffRepository.GetById(id);
 
         model.Should().NotBeNull();
         model.Id.Should().Be(diffModel.Id);
@@ -43,12 +44,13 @@ public class DiffRepositoryTests
     [Fact]
     public async Task Update_ModelFound_UpdateModelAndReturnUpdated()
     {
-        var diffModel = new DiffModel{Id = 1, Left = "string"};
+        var id = Guid.NewGuid();
+        var diffModel = new DiffModel{Id = id, Left = "string"};
         await _diffRepository.Create(diffModel);
         
         var modelToUpdate = new DiffModel
         {
-            Id = 1,
+            Id = id,
             Left = "new_string",
             Right = "string"
         };
@@ -67,7 +69,7 @@ public class DiffRepositoryTests
     {
         var model = new DiffModel
         {
-            Id = 1
+            Id = Guid.NewGuid()
         };
 
         await _diffRepository.Create(model);
@@ -78,7 +80,7 @@ public class DiffRepositoryTests
     [Fact]
     public async Task Create_ModelNotExists_CreateAndReturnCreated()
     {
-        var diffModel = new DiffModel{Id = 1, Left = "string"};
+        var diffModel = new DiffModel{Id = Guid.NewGuid(), Left = "string"};
         
         var createdModel = await _diffRepository.Create(diffModel);
 

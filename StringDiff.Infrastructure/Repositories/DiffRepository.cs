@@ -9,7 +9,7 @@ namespace StringDiff.Infrastructure.Repositories;
 public class DiffRepository : IDiffRepository
 {
     /// <inheritdoc/>
-    public Task<DiffModel?> GetById(int id)
+    public Task<DiffModel?> GetById(Guid id)
     {
         throw new NotSupportedException();
     }

@@ -9,11 +9,20 @@ public enum DiffResultResponseType
 }
 
 
-public record DiffResultResponse(DiffResultResponseType Result)
+public record DiffResultResponse
 {
-    public DiffResultResponseType Result { get; set; } = Result;
+    public DiffResultResponseType Result { get; set; }
     public Difference? Difference { get; set; }
 
+    public DiffResultResponse()
+    {
+    }
+    
+    public DiffResultResponse(DiffResultResponseType result)
+    {
+        Result = result;
+    }
+    
     public DiffResultResponse(DiffResultResponseType result, Difference difference) : this(result)
     {
         Difference = difference;

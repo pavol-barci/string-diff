@@ -29,15 +29,17 @@ public class DiffServiceTests
     [Fact]
     public async Task GetDiff_ModelNotFound_ThrowsNotFoundException()
     {
-        await Assert.ThrowsAsync<NotFoundException>(() => _diffService.GetDiff(1));
+        var id = Guid.NewGuid();
+        await Assert.ThrowsAsync<NotFoundException>(() => _diffService.GetDiff(id));
     }
     
     [Fact]
     public async Task GetDiff_DiffNotFinished_ReturnsNotFinished()
     {
-        _diffRepositoryMock.Setup(o => o.GetById(It.IsAny<int>())).ReturnsAsync(() => new DiffModel());
+        _diffRepositoryMock.Setup(o => o.GetById(It.IsAny<Guid>())).ReturnsAsync(() => new DiffModel());
+        var id = Guid.NewGuid();
 
-        var result = await _diffService.GetDiff(1);
+        var result = await _diffService.GetDiff(id);
 
         result.Should().NotBeNull();
         result.Result.Should().Be(DiffResultResponseType.NotFinished);
@@ -47,12 +49,13 @@ public class DiffServiceTests
     [Fact]
     public async Task GetDiff_DiffFinished_ReturnsResult()
     {
-        _diffRepositoryMock.Setup(o => o.GetById(It.IsAny<int>())).ReturnsAsync(() => new DiffModel
+        _diffRepositoryMock.Setup(o => o.GetById(It.IsAny<Guid>())).ReturnsAsync(() => new DiffModel
         {
             DiffResult = new DiffResult(DiffResultType.Equals)
         });
+        var id = Guid.NewGuid();
 
-        var result = await _diffService.GetDiff(1);
+        var result = await _diffService.GetDiff(id);
 
         result.Should().NotBeNull();
         result.Result.Should().Be(DiffResultResponseType.Equal);
@@ -62,7 +65,7 @@ public class DiffServiceTests
     [Fact]
     public async Task UpsertLeft_ModelUpdated_ReturnsFalse()
     {
-        _diffRepositoryMock.Setup(o => o.GetById(It.IsAny<int>())).ReturnsAsync((int id) => new DiffModel
+        _diffRepositoryMock.Setup(o => o.GetById(It.IsAny<Guid>())).ReturnsAsync((Guid id) => new DiffModel
         {
             Id = id
         });
@@ -70,12 +73,13 @@ public class DiffServiceTests
         {
             Input = "string"
         };
+        var id = Guid.NewGuid();
 
-        var result = await _diffService.UpsertLeft(1, request);
+        var result = await _diffService.UpsertLeft(id, request);
 
         result.Should().BeFalse();
         _diffRepositoryMock.Verify(o => o.Create(It.IsAny<DiffModel>()), Times.Never);
-        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == 1 && model.Left == request.Input)));
+        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Left == request.Input)));
         _diffCalculatorMock.Verify(o => o.CalculateDiff(It.IsAny<DiffModel>()), Times.Never);
     }
     
@@ -86,19 +90,20 @@ public class DiffServiceTests
         {
             Input = "string"
         };
+        var id = Guid.NewGuid();
 
-        var result = await _diffService.UpsertLeft(1, request);
+        var result = await _diffService.UpsertLeft(id, request);
 
         result.Should().BeTrue();
-        _diffRepositoryMock.Verify(o => o.Create(It.Is<DiffModel>(model => model.Id == 1 && model.Left == request.Input)));
-        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == 1 && model.Left == request.Input))); 
+        _diffRepositoryMock.Verify(o => o.Create(It.Is<DiffModel>(model => model.Id == id && model.Left == request.Input)));
+        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Left == request.Input))); 
         _diffCalculatorMock.Verify(o => o.CalculateDiff(It.IsAny<DiffModel>()), Times.Never);
     }
     
     [Fact]
     public async Task UpsertLeft_ModelFullyFilled_CalculatesDiffAndReturnsTrue()
     {
-        _diffRepositoryMock.Setup(o => o.GetById(It.IsAny<int>())).ReturnsAsync((int id) => new DiffModel
+        _diffRepositoryMock.Setup(o => o.GetById(It.IsAny<Guid>())).ReturnsAsync((Guid id) => new DiffModel
         {
             Id = id,
             Right = "string"
@@ -107,19 +112,20 @@ public class DiffServiceTests
         {
             Input = "string"
         };
+        var id = Guid.NewGuid();
 
-        var result = await _diffService.UpsertLeft(1, request);
+        var result = await _diffService.UpsertLeft(id, request);
 
         result.Should().BeFalse();
-        _diffCalculatorMock.Verify(o => o.CalculateDiff(It.Is<DiffModel>(model => model.Id == 1 && model.Left == request.Input && model.Right == "string")), Times.Once);
-        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == 1 && model.Left == request.Input)), Times.Once);
-        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == 1 && model.Left == request.Input)), Times.Once);
+        _diffCalculatorMock.Verify(o => o.CalculateDiff(It.Is<DiffModel>(model => model.Id == id && model.Left == request.Input && model.Right == "string")), Times.Once);
+        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Left == request.Input)), Times.Once);
+        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Left == request.Input)), Times.Once);
     }
     
     [Fact]
     public async Task UpsertRight_ModelUpdated_ReturnsFalse()
     {
-        _diffRepositoryMock.Setup(o => o.GetById(It.IsAny<int>())).ReturnsAsync((int id) => new DiffModel
+        _diffRepositoryMock.Setup(o => o.GetById(It.IsAny<Guid>())).ReturnsAsync((Guid id) => new DiffModel
         {
             Id = id
         });
@@ -127,12 +133,13 @@ public class DiffServiceTests
         {
             Input = "string"
         };
+        var id = Guid.NewGuid();
 
-        var result = await _diffService.UpsertRight(1, request);
+        var result = await _diffService.UpsertRight(id, request);
 
         result.Should().BeFalse();
         _diffRepositoryMock.Verify(o => o.Create(It.IsAny<DiffModel>()), Times.Never);
-        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == 1 && model.Right == request.Input)));
+        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Right == request.Input)));
         _diffCalculatorMock.Verify(o => o.CalculateDiff(It.IsAny<DiffModel>()), Times.Never);
     }
     
@@ -143,19 +150,20 @@ public class DiffServiceTests
         {
             Input = "string"
         };
+        var id = Guid.NewGuid();
 
-        var result = await _diffService.UpsertRight(1, request);
+        var result = await _diffService.UpsertRight(id, request);
 
         result.Should().BeTrue();
-        _diffRepositoryMock.Verify(o => o.Create(It.Is<DiffModel>(model => model.Id == 1 && model.Right == request.Input)));
-        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == 1 && model.Right == request.Input)));
+        _diffRepositoryMock.Verify(o => o.Create(It.Is<DiffModel>(model => model.Id == id && model.Right == request.Input)));
+        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Right == request.Input)));
         _diffCalculatorMock.Verify(o => o.CalculateDiff(It.IsAny<DiffModel>()), Times.Never);
     }
     
     [Fact]
     public async Task UpsertRight_ModelFullyFilled_CalculatesDiffAndReturnsTrue()
     {
-        _diffRepositoryMock.Setup(o => o.GetById(It.IsAny<int>())).ReturnsAsync((int id) => new DiffModel
+        _diffRepositoryMock.Setup(o => o.GetById(It.IsAny<Guid>())).ReturnsAsync((Guid id) => new DiffModel
         {
             Id = id,
             Left = "string"
@@ -164,12 +172,13 @@ public class DiffServiceTests
         {
             Input = "string"
         };
+        var id = Guid.NewGuid();
 
-        var result = await _diffService.UpsertRight(1, request);
+        var result = await _diffService.UpsertRight(id, request);
 
         result.Should().BeFalse();
-        _diffCalculatorMock.Verify(o => o.CalculateDiff(It.Is<DiffModel>(model => model.Id == 1 && model.Right == request.Input && model.Left == "string")), Times.Once);
-        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == 1 && model.Right == request.Input)), Times.Once);
-        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == 1 && model.Right == request.Input)), Times.Once);
+        _diffCalculatorMock.Verify(o => o.CalculateDiff(It.Is<DiffModel>(model => model.Id == id && model.Right == request.Input && model.Left == "string")), Times.Once);
+        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Right == request.Input)), Times.Once);
+        _diffRepositoryMock.Verify(o => o.Update(It.Is<DiffModel>(model => model.Id == id && model.Right == request.Input)), Times.Once);
     }
 }

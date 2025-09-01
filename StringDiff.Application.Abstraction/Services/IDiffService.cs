@@ -18,7 +18,7 @@ public interface IDiffService
     /// </returns>
     /// <exception cref="NotFoundException">Thrown when the model with id does not exist, was not created and attempt to update was made.</exception>
     /// <exception cref="ConflictException">Thrown when the model with id already exists and attempt to create was made.</exception>
-    Task<bool> UpsertLeft(int id, DiffRequest request);
+    Task<bool> UpsertLeft(Guid id, DiffRequest request);
     
     /// <summary>
     /// Upsert the right input string to the model. If both models are already filled then calculate the diff
@@ -30,7 +30,7 @@ public interface IDiffService
     /// </returns>
     /// <exception cref="NotFoundException">Thrown when the model with id does not exist, was not created and attempt to update was made.</exception>
     /// <exception cref="ConflictException">Thrown when the model with id already exists and attempt to create was made.</exception>
-    Task<bool> UpsertRight(int id, DiffRequest request);
+    Task<bool> UpsertRight(Guid id, DiffRequest request);
     
     /// <summary>
     /// Get the calculated difference of strings
@@ -41,5 +41,5 @@ public interface IDiffService
     ///     - <see cref="DiffResultResponse"/> => when diff already calculated. This object contains the result with possible offset and length
     /// </returns>
     /// <exception cref="NotFoundException">Thrown when the model with id does not exist.</exception>
-    Task<DiffResultResponse?> GetDiff(int id);
+    Task<DiffResultResponse?> GetDiff(Guid id);
 }

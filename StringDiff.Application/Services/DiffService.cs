@@ -14,19 +14,19 @@ public class DiffService(IDiffRepository diffRepository, IDiffCalculator diffCal
 {
 
     ///<inheritdoc/>
-    public async Task<bool> UpsertLeft(int id, DiffRequest diffRequest)
+    public async Task<bool> UpsertLeft(Guid id, DiffRequest diffRequest)
     {
         return await UpsertInternal(id, diffModel => diffModel.Left = diffRequest.Input, () => new DiffModel(diffRequest.Input));
     }
 
     ///<inheritdoc/>
-    public async Task<bool> UpsertRight(int id, DiffRequest diffRequest)
+    public async Task<bool> UpsertRight(Guid id, DiffRequest diffRequest)
     {
         return await UpsertInternal(id, diffModel => diffModel.Right = diffRequest.Input, () => new DiffModel(right: diffRequest.Input));
     }
 
     ///<inheritdoc/>
-    public async Task<DiffResultResponse?> GetDiff(int id)
+    public async Task<DiffResultResponse?> GetDiff(Guid id)
     {
         var model = await diffRepository.GetById(id);
         
@@ -50,7 +50,7 @@ public class DiffService(IDiffRepository diffRepository, IDiffCalculator diffCal
     /// </returns>
     /// <exception cref="NotFoundException">Thrown when the model with id does not exist, was not created and attempt to update was made.</exception>
     /// <exception cref="ConflictException">Thrown when the model with id already exists and attempt to create was made.</exception>
-    private async Task<bool> UpsertInternal(int id, Action<DiffModel> updateAction, Func<DiffModel> createFunction)
+    private async Task<bool> UpsertInternal(Guid id, Action<DiffModel> updateAction, Func<DiffModel> createFunction)
     {
         var model = await diffRepository.GetById(id);
         var created = false;
